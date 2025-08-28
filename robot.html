@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crush mo ako no ahaha</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fce4ec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      text-align: center;
+      overflow: hidden; /* important for falling flowers */
+    }
+
+    h2 {
+      color: #e91e63;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #4caf50;
+      color: white;
+    }
+
+    #noBtn {
+      background: #f44336;
+      color: white;
+      position: relative;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 22px;
+      color: #d81b60;
+      display: none;
+      z-index: 2;
+    }
+
+    #emoji {
+      font-size: 60px;
+      margin-top: 15px;
+      display: none;
+      animation: pop 0.6s ease forwards;
+      z-index: 2;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Flower (tulip) animation */
+    .flower {
+      position: absolute;
+      top: -50px;
+      font-size: 40px;
+      animation: fall 5s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h2 id="title">Crush mo ako no ahaha? 😁</h2>
+  
+  <div class="buttons" id="buttonGroup">
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <p id="message">Wala na, babawi yan auh 😘<br>❤️ I love you ❤️</p>
+  <div id="emoji">🥰💖😍</div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const message = document.getElementById('message');
+    const emoji = document.getElementById('emoji');
+    const buttonGroup = document.getElementById('buttonGroup');
+    const title = document.getElementById('title');
+
+    yesBtn.addEventListener('click', () => {
+      buttonGroup.style.display = 'none'; // hide buttons
+      title.style.display = 'none';       // hide the title
+      message.style.display = 'block';    // show message
+      emoji.style.display = 'block';      // show emoji
+
+      // create flowers
+      for (let i = 0; i < 20; i++) {
+        let flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.innerHTML = "🌷"; // tulip emoji
+        flower.style.left = Math.random() * window.innerWidth + "px";
+        flower.style.animationDuration = (3 + Math.random() * 3) + "s"; // speed variation
+        document.body.appendChild(flower);
+
+        // remove flower after animation
+        setTimeout(() => {
+          flower.remove();
+        }, 6000);
+      }
+    });
+
+    noBtn.addEventListener('mouseover', () => {
+      // Move No button to a random position
+      const x = Math.floor(Math.random() * 300) - 150;
+      const y = Math.floor(Math.random() * 300) - 150;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  </script>
+</body>
+</html>
